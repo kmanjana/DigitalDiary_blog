@@ -25,7 +25,7 @@ export class UpdatepostComponent implements OnInit {
   UpdatePost(){
     let userid = localStorage.getItem("UserID");
     this.postService.updatePost(this.postItem , userid);
-    alert("success");
+    alert('Updated "' + this.postItem.title + '" successfully!');
     this._router.navigate(['/myposts']);
   }
 

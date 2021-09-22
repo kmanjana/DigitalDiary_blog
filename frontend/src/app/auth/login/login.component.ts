@@ -10,14 +10,18 @@ import { UserModel } from '../signup/user.model';
 })
 export class LoginComponent implements OnInit {
 
-  user = new UserModel("");
+  user = new UserModel("","","","","","");
 
   constructor(private authService: AuthService,private _router: Router) { }
+
+  message: String = "";
+  failedlogin:Boolean = false;
 
   ngOnInit(): void {
   } 
 
-  loginUser(){
+  loginUser(userlogin:any){  //userlogin - name of template reference variable
+    console.log(userlogin.controls['email'].value);  //gets the username that is entered in the form
     this.authService.loginUser(this.user)
     .subscribe(
       res=>{
@@ -33,7 +37,8 @@ export class LoginComponent implements OnInit {
       },
       err=>{
         console.log(err);
-        this._router.navigate(['/login']);
+        this.message = err.error;
+        this.failedlogin=true;
       }
     )
   }

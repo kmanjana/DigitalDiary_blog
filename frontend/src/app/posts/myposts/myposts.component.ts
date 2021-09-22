@@ -13,7 +13,7 @@ import { PostModel } from '../post.model'
 export class MypostsComponent implements OnInit {
 
   posts : PostModel[] = [];
-  user = new UserModel("");
+  user = new UserModel("","","","","","");
 
   constructor(private postService: PostService ,public _auth:AuthService, private _router: Router) { }
 
@@ -35,11 +35,15 @@ export class MypostsComponent implements OnInit {
     this._router.navigate(['/updatepost']);
   }
 
-  DeletePost(post: any){
-    this.postService.deletePost(post._id)
-    .subscribe((data)=>{
-      this.posts = this.posts.filter(b => b !== post);  //deletes product from list (line 14) and shows the list of products that is != the deleted product
-    })
+  Confirmdelete(post:any){
+    if(confirm('Are you sure you want to delete "' + post.title + '" ?')){
+      this.postService.deletePost(post._id)
+      .subscribe((data)=>{
+        this.posts = this.posts.filter(b => b !== post);  //deletes product from list (line 14) and shows the list of products that is != the deleted product
+        })      
+        alert("deletion successfull!");
+    }
+    
   }
 
   setPostId(post:any){

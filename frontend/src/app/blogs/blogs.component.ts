@@ -18,7 +18,6 @@ export class BlogsComponent implements OnInit {
   } 
 
   categorySelect(catgselect : any){
-    console.log("hai");
     console.log(catgselect);
     this.postService.getBlogsByCatg(catgselect)
     .subscribe((data)=>{
